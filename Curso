@@ -1,0 +1,49 @@
+package T2POO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Curso implements Avaliavel {
+    private String nome; 
+    private String descricao; 
+    private int cargaHoraria; 
+    private Professor professorResponsavel; 
+    private List<Aluno> alunosMatriculados;
+
+    public Curso(String nome, String descricao, int cargaHoraria, Professor professorResponsavel) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.cargaHoraria = cargaHoraria;
+        this.professorResponsavel = professorResponsavel;
+        this.alunosMatriculados = new ArrayList<>();
+    }
+
+    public void matricularAluno(Aluno aluno) throws CursoLotadoException {
+        System.out.println("AVISO: Escolha entre Curso Online ou Curso Presencial para realizar a matrícula.");
+    }
+
+    @Override
+    public void avaliarAluno(Aluno aluno, double nota) {
+        System.out.println("Avaliação do aluno " + aluno.getNome() + " no curso " + this.nome + " com nota: " + nota);
+    }
+    
+    public String getNome() { 
+        return nome; }
+    public void setNome(String nome) { 
+        this.nome = nome; }
+    public Professor getProfessorResponsavel() { 
+        return professorResponsavel; }
+    public void setProfessorResponsavel(Professor professorResponsavel) { 
+        this.professorResponsavel = professorResponsavel; }
+    public List<Aluno> getAlunosMatriculados() { 
+        return alunosMatriculados; }
+    public String getDescricao() { 
+        return descricao; }
+    public void setDescricao(String descricao) { 
+        this.descricao = descricao; }
+    public int getCargaHoraria() { 
+        return cargaHoraria; }
+    public void setCargaHoraria(int cargaHoraria) { 
+        this.cargaHoraria = cargaHoraria; }
+        
+}
