@@ -1,0 +1,21 @@
+package T2POO;
+
+public class CursoOnline extends Curso {
+    private String acesso;
+
+    public CursoOnline(String nome, String descricao, int cargaHoraria, Professor professorResponsavel, String acesso) {
+        super(nome, descricao, cargaHoraria, professorResponsavel);
+        this.acesso = acesso;
+    }
+
+    @Override
+    public void matricularAluno(Aluno aluno) {
+        getAlunosMatriculados().add(aluno);
+        System.out.println("Aluno " + aluno.getNome() + " matriculado no Curso Online: " + getNome());
+    }
+
+    public String getacesso() { 
+        return acesso; }
+    public void setacesso(String acesso) { 
+        this.acesso = acesso; }
+}
