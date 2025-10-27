@@ -1,0 +1,37 @@
+package T2POO;
+
+public class Matricula {
+    private Aluno aluno;
+    private Curso curso;
+    private StatusMatricula status;
+    private String dataMatricula;
+
+    public Matricula(Aluno aluno, Curso curso, String dataMatricula) {
+        this.aluno = aluno;
+        this.curso = curso;
+        this.status = StatusMatricula.EM_CURSO; // Status inicial para todos que se matriculam
+        this.dataMatricula = dataMatricula;
+    }
+
+    public Aluno getAluno() { 
+        return aluno; }
+    public void setAluno(Aluno aluno) { 
+        this.aluno = aluno; }
+    public Curso getCurso() { 
+        return curso; }
+    public void setCurso(Curso curso) { 
+        this.curso = curso; }
+    public StatusMatricula getStatus() { 
+        return status; }
+    public void setStatus(StatusMatricula status) { 
+        this.status = status; }
+    public String getDataMatricula() { 
+        return dataMatricula; }
+    public void setDataMatricula(String dataMatricula) { 
+        this.dataMatricula = dataMatricula; }
+
+    @Override
+    public String toString() {
+        return "Matricula [Aluno=" + aluno.getNome() + ", Curso=" + curso.getNome() + ", Status=" + status + "]";
+    }
+}
