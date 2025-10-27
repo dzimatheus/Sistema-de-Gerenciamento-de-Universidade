@@ -1,0 +1,7 @@
+package T2POO;
+
+public interface Avaliavel {
+    /* Interface para as notas dos alunos,
+        passando a matricula do aluno e a sua nota como argumento*/ 
+    void avaliarAluno(Aluno aluno, double nota);
+}
