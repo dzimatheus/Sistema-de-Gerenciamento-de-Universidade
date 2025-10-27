@@ -1,0 +1,25 @@
+package T2POO;
+
+public class CursoPresencial extends Curso {
+    private int limiteDeVagas;
+
+    public CursoPresencial(String nome, String descricao, int cargaHoraria, Professor professorResponsavel, int limiteDeVagas) {
+        super(nome, descricao, cargaHoraria, professorResponsavel);
+        this.limiteDeVagas = limiteDeVagas;
+    }
+
+    @Override
+    public void matricularAluno(Aluno aluno) throws CursoLotadoException {
+        if (getAlunosMatriculados().size() < limiteDeVagas) {
+            getAlunosMatriculados().add(aluno);
+            System.out.println("Aluno " + aluno.getNome() + " matriculado no Curso Presencial: " + getNome());
+        } else {
+            throw new CursoLotadoException("O curso presencial " + getNome() + " está lotado. Limite: " + limiteDeVagas);
+        }
+    }
+
+    public int getLimiteDeVagas() { 
+        return limiteDeVagas; }
+    public void setLimiteDeVagas(int limiteDeVagas) { 
+        this.limiteDeVagas = limiteDeVagas; }
+}
