@@ -1,0 +1,89 @@
+package T2POO;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Universidade {
+    private List<Aluno> alunos;
+    private List<Professor> professores;
+    private List<Curso> cursos;
+    private List<Matricula> matriculas;
+
+    public Universidade() {
+        this.alunos = new ArrayList<>();
+        this.professores = new ArrayList<>();
+        this.cursos = new ArrayList<>();
+        this.matriculas = new ArrayList<>();
+    }
+
+    // Métodos de Cadastro
+    public void cadastrarAluno(Aluno aluno) {
+        this.alunos.add(aluno);
+    }
+
+    public void cadastrarProfessor(Professor professor) {
+        this.professores.add(professor);
+    }
+
+    public void cadastrarCurso(Curso curso) {
+        this.cursos.add(curso);
+        Professor professor = curso.getProfessorResponsavel();
+        if (professor != null) {
+            professor.adicionarCurso(curso);
+        }
+    }
+    
+    // Realiza Matrícula 
+    public void realizarMatricula(Aluno aluno, Curso curso, String data) throws CursoLotadoException {
+        // Chama o método matricularAluno específico (Presencial ou Online)
+        curso.matricularAluno(aluno);
+        Matricula novaMatricula = new Matricula(aluno, curso, data);
+        this.matriculas.add(novaMatricula);
+        System.out.println("Matrícula registrada com sucesso: " + novaMatricula);
+    }
+
+    // Listar os cursos disponíveis
+    public void listarCursosDisponiveis() {
+        System.out.println("\n--- Cursos Disponíveis ---");
+        if (cursos.isEmpty()) {
+            System.out.println("Nenhum curso cadastrado.");
+            return;
+        }
+        for (Curso curso : cursos) {
+            String tipo = (curso instanceof CursoPresencial) ? "Presencial" : "Online";
+            System.out.println(String.format("Nome: %s (%s) | Professor: %s",
+            curso.getNome(), tipo, curso.getProfessorResponsavel().getNome()));
+        }
+    }
+    
+    // Buscar aluno por nome
+    public List<Aluno> buscarAlunoPorNome(String nome) throws AlunoNaoEncontradoException {
+        List<Aluno> resultados = alunos.stream() //Fluxo, permite realizar operações
+                .filter(a -> a.getNome().toLowerCase().contains(nome.toLowerCase()))
+                .collect(Collectors.toList());
+        
+        if (resultados.isEmpty()) {
+            // Exceção
+            throw new AlunoNaoEncontradoException("Aluno com nome contendo '" + nome + "' não encontrado.");
+        }
+        return resultados;
+    }
+    
+    // Buscar professor por nome
+    public List<Professor> buscarProfessorPorNome(String nome) {
+        return professores.stream()
+                .filter(p -> p.getNome().toLowerCase().contains(nome.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Aluno> getAlunos() { 
+        return alunos; }
+    public List<Professor> getProfessores() { 
+        return professores; }
+    public List<Curso> getCursos() { 
+        return cursos; }
+    public List<Matricula> getMatriculas() { 
+        return matriculas; }
+        
+}
