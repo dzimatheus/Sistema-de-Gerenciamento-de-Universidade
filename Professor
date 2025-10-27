@@ -1,0 +1,39 @@
+package T2POO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Professor {
+    private String nome;
+    private String departamento; 
+    private List<Curso> cursos; 
+
+    public Professor(String nome, String departamento) {
+        this.nome = nome;
+        this.departamento = departamento;
+        this.cursos = new ArrayList<>(); 
+    }
+
+    // Método para adicionar um curso (usado pela Universidade)
+    public void adicionarCurso(Curso curso) {
+        if (curso != null && !this.cursos.contains(curso)) {
+            this.cursos.add(curso);
+        }
+    }
+
+    public String getNome() { 
+        return nome; }
+    public void setNome(String nome) { 
+        this.nome = nome; }
+    public String getDepartamento() { 
+        return departamento; }
+    public void setDepartamento(String departamento) { 
+        this.departamento = departamento; }
+    public List<Curso> getCursos() {
+        return cursos; }
+
+    @Override
+    public String toString() {
+        return "Professor [Nome=" + nome + ", Departamento=" + departamento + "]";
+    }
+}
