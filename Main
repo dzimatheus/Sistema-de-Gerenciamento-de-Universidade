@@ -1,0 +1,83 @@
+package T2POO;
+
+public class Main {
+    public static void main(String[] args) {
+        // Criar instância da Universidade
+        Universidade universidade = new Universidade();
+
+        // Criar alguns professores
+        Professor prof1 = new Professor("Carlos", "Computação");
+        Professor prof2 = new Professor("Marcelo", "Matemática");
+        
+        // Cadastrar professores
+        universidade.cadastrarProfessor(prof1);
+        universidade.cadastrarProfessor(prof2);
+
+        // Criar alunos
+        Aluno aluno1 = new Aluno("Matheus Dzioba", "RA001");
+        Aluno aluno2 = new Aluno("Pamela", "RA002");
+        Aluno aluno3 = new Aluno("Breno Fortes", "RA003");
+
+        // Cadastrar alunos
+        universidade.cadastrarAluno(aluno1);
+        universidade.cadastrarAluno(aluno2);
+        universidade.cadastrarAluno(aluno3);
+
+        // Criar cursos (tanto online quanto presencial)
+        CursoOnline POO = new CursoOnline(
+            "POO",
+            "Programação Orientada a Objeto",
+            60,
+            prof1,
+            "plataforma.curso.com/java"
+        );
+
+        CursoPresencial Calculo = new CursoPresencial(
+            "Cálculo II",
+            "Integral duplas e triplas",
+            80,
+            prof2,
+            2  // limite de vagas
+        );
+
+        // Cadastrar cursos
+        universidade.cadastrarCurso(POO);
+        universidade.cadastrarCurso(Calculo);
+
+        // Testar funcionalidades
+        try {
+            // Listar cursos disponíveis
+            universidade.listarCursosDisponiveis();
+
+            // Realizar algumas matrículas
+            System.out.println("\n=== Realizando matrículas ===");
+            universidade.realizarMatricula(aluno1, POO, "2025-10-23");
+            universidade.realizarMatricula(aluno2, Calculo, "2025-10-23");
+            universidade.realizarMatricula(aluno3, Calculo, "2025-10-23");
+
+            // Tentar matricular mais um aluno no curso presencial (exceção)
+            System.out.println("\n=== Testando limite de vagas ===");
+            Aluno aluno4 = new Aluno("Gabriel Dzioba", "RA004");
+            universidade.realizarMatricula(aluno4, Calculo, "2023-10-23");
+
+        } catch (CursoLotadoException erro) {
+            System.out.println("Erro: " + erro.getMessage());
+        }
+
+        // Testar busca de alunos
+        try {
+            System.out.println("\n=== Buscando alunos ===");
+            System.out.println("Resultado da busca por 'Matheus': ");
+            System.out.println(universidade.buscarAlunoPorNome("Matheus"));
+            System.out.println(universidade.buscarAlunoPorNome("Pedro"));
+
+        } catch (AlunoNaoEncontradoException erro) {
+            System.out.println("Erro na busca: " + erro.getMessage());
+        }
+
+        // Avaliar os alunos
+        System.out.println("\n=== Avaliando alunos ===");
+        POO.avaliarAluno(aluno1, 8.5);
+        Calculo.avaliarAluno(aluno3, 7.0);
+    }
+}
